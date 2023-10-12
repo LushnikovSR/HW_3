@@ -1,5 +1,7 @@
 package org.example;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -129,7 +131,15 @@ class Person extends PersonData {
 
     @Override
     void writeInFile(String fileName) throws WriteFileException {
-        throw new WriteFileException("Не удалось записать данные в файл", fileName);
+        try(FileWriter writer = new FileWriter(fileName, true))
+        {
+            writer.write(data[0] + " " + data[1] + " " + data[2] + " " + data[3] + " " + data[4] + " " + data[5]
+                    + " " + data[6] + "\n");
+            writer.flush();
+        }
+        catch(IOException ex){
+            throw new WriteFileException("Не удалось записать данные в файл", fileName);
+        }
     }
 }
 
