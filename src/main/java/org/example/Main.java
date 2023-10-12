@@ -23,16 +23,27 @@ public class Main {
             }
             scanner.close();
         }
+        catch (InputDataAmountException e){
+            System.out.printf("Исключение при вводе количества данных человека, %s из 6", e.getCurrentAmount());
+        }
         catch (PersonSurnameException e){
             System.out.printf("Исключение при вводе фамилии человека %s", e.surname);
         }
         catch (PersonNameException e){
-            System.out.printf("Исключение при вводе фамилии человека %s", e.getName());
+            System.out.printf("Исключение при вводе имени человека %s", e.getName());
         }
         catch (PersonPatronymicException e){
-            System.out.printf("Исключение при вводе фамилии человека %s", e.getPatronymic());
+            System.out.printf("Исключение при вводе отчества человека %s", e.getPatronymic());
         }
-
+        catch (PersonBirtdayException e) {
+            System.out.printf("Исключение при вводе даты дня рождения человека %s", e.getBirthday());
+        }
+        catch (PersonPhoneException e) {
+            System.out.printf("Исключение при вводе номера телефона человека %s", e.getPhone());
+        }
+        catch (PersonSexException e) {
+            System.out.printf("Исключение при вводе пола человека %s", e.getSex());
+        }
     }
 
 }
@@ -184,6 +195,10 @@ class PersonPatronymicException extends AppException {
 class PersonBirtdayException extends AppException {
     String birthday;
 
+    public String getBirthday() {
+        return birthday;
+    }
+
     public PersonBirtdayException(String message, String birthday) {
         super(message);
         this.birthday = birthday;
@@ -193,6 +208,10 @@ class PersonBirtdayException extends AppException {
 class PersonPhoneException extends AppException{
     String phone;
 
+    public String getPhone() {
+        return phone;
+    }
+
     public PersonPhoneException(String message, String phone) {
         super(message);
         this.phone = phone;
@@ -201,6 +220,10 @@ class PersonPhoneException extends AppException{
 
 class PersonSexException extends AppException{
     String sex;
+
+    public String getSex() {
+        return sex;
+    }
 
     public PersonSexException(String message, String sex) {
         super(message);
